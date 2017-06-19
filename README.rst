@@ -28,7 +28,7 @@
   print json.dumps(ret)
 
 ```
-JSON data from reading a single sheet excel file 
+JSON data from reading a single sheet excel file
 {
     "fields": {
         "00": [
@@ -54,6 +54,8 @@ JSON data from reading a single sheet excel file
 }
 ```
 
-## misc
+## web stuff
 * url domain extraction
-* cli function using argparse
+
+## misc
+* support simple cli function using argparse
