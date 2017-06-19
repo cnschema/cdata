@@ -1,9 +1,13 @@
-# cdata
+cdata
+-------------
+
 
 "see data", see data, handy snippets for conversion, cleaning and integration.
 
 
-## json data manipulation
+json data manipulation
+-------------
+
 * json (and json stream) file IO, e.g.  items2file(...)
 * json data access, e.g. json_get(...)
 * json array statistics, e.g. stat(...)
@@ -15,7 +19,9 @@
   logging.info((the_input, the_output))
 
 
-## table data manipulation
+table data manipulation
+-------------
+
 * json array to/from excel
 
 .. code-block:: python
@@ -27,9 +33,12 @@
   ret = excel2json(filename)
   print json.dumps(ret)
 
-```
+
+
 JSON data from reading a single sheet excel file
-{
+.. code-block:: json
+
+  {
     "fields": {
         "00": [
             "name",
@@ -51,11 +60,14 @@ JSON data from reading a single sheet excel file
             }
         ]
     }
-}
-```
+  }
 
-## web stuff
+web stuff
+-------------
+
 * url domain extraction
 
-## misc
+misc
+-------------
+
 * support simple cli function using argparse
