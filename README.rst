@@ -27,6 +27,32 @@
   ret = excel2json(filename)
   print json.dumps(ret)
 
+```
+JSON data from reading a single sheet excel file 
+{
+    "fields": {
+        "00": [
+            "name",
+            "年龄",
+            "notes"
+        ]
+    },
+    "data": {
+        "00": [
+            {
+                "notes": "",
+                "年龄": 18.0,
+                "name": "张三"
+            },
+            {
+                "notes": "this is li si",
+                "年龄": 18.0,
+                "name": "李四"
+            }
+        ]
+    }
+}
+```
 
 ## misc
 * url domain extraction
