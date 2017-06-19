@@ -1,7 +1,6 @@
 cdata
 -------------
 
-
 "see data", see data, handy snippets for conversion, cleaning and integration.
 
 
@@ -13,6 +12,7 @@ json data manipulation
 * json array statistics, e.g. stat(...)
 
 .. code-block:: python
+
   from cdata.core import any2utf8
   the_input = {"hello": u"世界"}
   the_output = any2utf8(the_input)
@@ -25,6 +25,7 @@ table data manipulation
 * json array to/from excel
 
 .. code-block:: python
+
   import json
   from cdata.table import excel2json,json2excel
   filename = "test.xls"
@@ -36,6 +37,7 @@ table data manipulation
 
 
 JSON data from reading a single sheet excel file
+
 .. code-block:: json
 
   {
