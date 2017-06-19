@@ -19,15 +19,6 @@ import urlparse
 import re
 import collections
 
-####################################
-# url data manipulation
-def url2domain(url):
-    parsed_uri = urlparse.urlparse(url)
-    domain = '{uri.netloc}'.format(uri=parsed_uri)
-    domain = re.sub("^.+@","",domain)
-    domain = re.sub(":.+$","",domain)
-    return domain
-
 
 ####################################################
 def main_subtask(module_name, method_name_prefixs=["task_"], optional_params={}):

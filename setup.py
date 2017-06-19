@@ -8,4 +8,9 @@ setup(name='cdata',
       author_email='lidingpku@gmail.com',
       license='Apache 2.0',
       packages=['cdata'],
+      install_requires=[
+          'xlrd','xlwt',
+      ],
+      test_suite='nose.collector',
+      tests_require=['nose'],
       zip_safe=False)

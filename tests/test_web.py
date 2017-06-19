@@ -10,9 +10,9 @@ except ImportError:
     import unittest
 
 import cdata
-from cdata.misc import url2domain
+from cdata.web import url2domain
 
-class MiscTestCase(unittest.TestCase):
+class WebTestCase(unittest.TestCase):
     def setUp(self):
         pass
 
