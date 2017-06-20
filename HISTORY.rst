@@ -9,3 +9,4 @@ History
 
 * initial PyPI release
 * support json, table(excel), web modules
+* connect to travis CI
