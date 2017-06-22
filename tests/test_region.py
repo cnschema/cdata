@@ -32,7 +32,6 @@ class EntityTestCase(unittest.TestCase):
         assert u"浦东新区" == self.ner.normalize_region_name(u"浦东", "district")
         assert u"浦东新区" == self.ner.normalize_region_name(u"浦东新区", "district")
 
-
         assert u"上海" == self.ner.guess_province([u"上海西红柿集团"])
         assert u"上海" == self.ner.guess_province([u"浦东新区软件园"])
         assert u"辽宁" == self.ner.guess_province([u"朝阳市软件园"])
@@ -57,7 +56,7 @@ class EntityTestCase(unittest.TestCase):
         assert u"广东省" == city_info.get("province")
 
         city_info = self.ner.guess_all([u"南溪镇扬美刘大道中段老祠村道脚008号"])
-        assert None == city_info
+        assert None is city_info
 
         city_info = self.ner.guess_all(["新塘镇大敦村", "增城市新塘众生药店"])
         assert u"district" == city_info.get("type")
@@ -114,7 +113,7 @@ class EntityTestCase(unittest.TestCase):
 
         inputdata = ["水东镇东阳北街50号", "水东镇长安药店（已迁入三角所）"]
         city_info = self.ner.guess_all(inputdata)
-        assert None == city_info
+        assert None is city_info
 
         inputdata = ["龙门县龙城林园街33号", "龙城新利药店"]
         city_info = self.ner.guess_all(inputdata)
@@ -206,7 +205,6 @@ class EntityTestCase(unittest.TestCase):
         city_info = self.ner.guess_all(inputdata)
         assert u"district" == city_info.get("type")
         assert u"广东省" == city_info.get("province")
-
 
 
 if __name__ == '__main__':

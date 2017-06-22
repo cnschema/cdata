@@ -459,7 +459,7 @@ class RegionEntity():
 
             if len(entities) > 1:
                 counter["one-alias-many-entities"] += 1
-                #logging.info(u"{}[{}] {}".format(alias, len(entities), u",".join([x["name"]+x["type"] for x in entities])))
+                # logging.info(u"{}[{}] {}".format(alias, len(entities), u",".join([x["name"]+x["type"] for x in entities])))
 
         # prepare for NER
         for index in ['province', 'city', 'district']:
@@ -574,12 +574,12 @@ class RegionEntity():
             # skip name without blacklist
             regex = ur"^[^省市县]{2,3}([庄村镇乡])"
             if re.search(regex, address):
-                #logging.info(u"skip村镇乡 {}".format(address))
+                # logging.info(u"skip村镇乡 {}".format(address))
                 continue
 
             regex = ur"^[^省市县]{2,5}([街路巷弄组]|大道|花园|市场)"
             if re.search(regex, address):
-                #logging.info(u"skip村镇乡 {}".format(address))
+                # logging.info(u"skip村镇乡 {}".format(address))
                 continue
 
             seg_list = list(jieba.cut(address, cut_all=False, HMM=False))
@@ -625,9 +625,9 @@ class RegionEntity():
 
                 # if idx > 0:
                 # skip name without whitelist
-                #regex = ur"(.{2,6}(自治)?[省市县]|^.{2,6}(自治)?[省市县区])"
+                # regex = ur"(.{2,6}(自治)?[省市县]|^.{2,6}(自治)?[省市县区])"
                 # if not re.search(regex, address):
-                #logging.info(u"skip省市县区 {}".format(address))
+                # logging.info(u"skip省市县区 {}".format(address))
                 #    break
 
                 if not cityid_list and len(seg) > 2 and idx == 0:
@@ -720,10 +720,12 @@ def task_guess_all(args=None):
     addresses = ["龙江路之路村集资楼1号楼4号门市", "合作区德仁堂药店"]
     addresses = ["", "北京同仁堂广州药业连锁有限公司农林店"]
     addresses = ["北京海淀区阜成路52号（定慧寺）", "北京大学肿瘤医院"]
+    addresses = ["水东镇东阳北街50号", "水东镇长安药店（已迁入三角所）"]
 
     result = city_data.guess_all(addresses)
-    logging.info(json.dumps(result, ensure_ascii=False))
-    logging.info(render_result(result, addresses[1], addresses[0]))
+    if result:
+        logging.info(json.dumps(result, ensure_ascii=False))
+        logging.info(render_result(result, addresses[1], addresses[0]))
 
 
 def render_result(result, name=None, address=None):
@@ -736,6 +738,7 @@ def render_result(result, name=None, address=None):
     data = [x for x in data if x]
     msg = u"\t".join(any2unicode(data))
     return msg
+
 
 def task_guess_all_batch(args):
     ner = RegionEntity()
