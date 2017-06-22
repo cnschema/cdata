@@ -122,7 +122,13 @@ entity manipulation
      "cityid": "110108",
      "type": "district"}
   """
+
 misc
 -------------
 
 * support simple cli function using argparse
+
+
+notes
+-------------
+release package using https://github.com/pypa/twine
