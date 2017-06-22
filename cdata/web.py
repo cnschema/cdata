@@ -14,10 +14,8 @@ import hashlib
 import datetime
 import logging
 import time
-import argparse
 import urlparse
 import re
-import collections
 
 ####################################
 # url data manipulation

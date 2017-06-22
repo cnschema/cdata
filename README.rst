@@ -69,6 +69,21 @@ web stuff
 
 * url domain extraction
 
+entity manipulation
+-------------
+
+* SimpleEntity.ner()
+
+.. code-block:: python
+
+  from cdata.entity import SimpleEntity
+  entity_list = [{"@id":"1","name":u"张三"},{"@id":"2","name":u"李四"}]
+  ner = SimpleEntity(entity_list)
+  sentence = "张三给了李四一个苹果"
+  ret = ner.ner(sentence)
+  logging.info(json.dumps(ret, ensure_ascii=False, indent=4))
+
+
 misc
 -------------
 

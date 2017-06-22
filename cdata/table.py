@@ -56,7 +56,6 @@ def json2excel(items, keys, filename, page_size=60000):
 def excel2json(filename, non_empty_col=0, file_contents=None):
     # http://www.lexicon.net/sjmachin/xlrd.html
 
-    counter = collections.Counter()
     if file_contents:
         workbook = xlrd.open_workbook(file_contents=file_contents)
     else:
