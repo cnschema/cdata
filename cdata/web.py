@@ -4,7 +4,6 @@
 
 # utility stuff
 
-#base packages
 import os
 import sys
 import json
@@ -17,11 +16,12 @@ import time
 import urlparse
 import re
 
-####################################
-# url data manipulation
+
 def url2domain(url):
+    """ extract domain from url
+    """
     parsed_uri = urlparse.urlparse(url)
     domain = '{uri.netloc}'.format(uri=parsed_uri)
-    domain = re.sub("^.+@","",domain)
-    domain = re.sub(":.+$","",domain)
+    domain = re.sub("^.+@", "", domain)
+    domain = re.sub(":.+$", "", domain)
     return domain

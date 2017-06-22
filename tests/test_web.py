@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Path hack
-import os, sys
+import os
+import sys
 sys.path.insert(0, os.path.abspath('..'))
 
 try:
@@ -9,15 +10,15 @@ try:
 except ImportError:
     import unittest
 
-import cdata
-from cdata.web import url2domain
+from cdata.web import url2domain  # noqa
+
 
 class WebTestCase(unittest.TestCase):
     def setUp(self):
         pass
 
     def test_url2domain(self):
-        the_input = "http://www.sge.com.cn/sjzx/mrhqsj/540603?top=789398439266459648"
+        the_input = "http://www.sge.com.cn/sjzx/mrhqsj/540603"
         the_output = url2domain(the_input)
         assert the_output == "www.sge.com.cn", the_output
 

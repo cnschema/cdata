@@ -4,7 +4,7 @@
 
 # utility stuff
 
-#base packages
+# base packages
 import os
 import sys
 import json
@@ -21,6 +21,7 @@ import jieba
 from core import any2unicode, stat
 from misc import main_subtask
 
+
 class SimpleEntity():
     def __init__(self, entity_list):
         """
@@ -35,11 +36,11 @@ class SimpleEntity():
 
         for entity in entity_list_unicode:
             name = entity["name"]
-            self.entities[name].append( entity )
+            self.entities[name].append(entity)
 
         for entity in entity_list_unicode:
-            for name in entity.get("alternateName",[]):
-                self.entities[name].append( entity )
+            for name in entity.get("alternateName", []):
+                self.entities[name].append(entity)
 
         stat(entity_list_unicode, ["name"])
 
@@ -49,13 +50,13 @@ class SimpleEntity():
             self.tokenizer.add_word(name)
 
     def ner(self, sentence):
-        #normalize to unicode
+        # normalize to unicode
         sentence = any2unicode(sentence)
 
-        #split
+        # split
         segments = self.tokenizer.cut(sentence, HMM=False)
 
-        #generate output
+        # generate output
         word_index = 0
         ret = []
         for segment in segments:
@@ -63,15 +64,16 @@ class SimpleEntity():
 
             matched_entities = self.entities.get(unicode(segment))
             if matched_entities:
-                temp = { "text":segment,
-                         "index":word_index,
-                         "entities": matched_entities}
+                temp = {"text": segment,
+                        "index": word_index,
+                        "entities": matched_entities}
                 ret.append(temp)
-            word_index+= len(segment)
+            word_index += len(segment)
         return ret
 
+
 def task_ner_test(args=None):
-    entity_list = [{"@id":"1","name":"张三"},{"@id":"2","name":"李四"}]
+    entity_list = [{"@id": "1", "name": "张三"}, {"@id": "2", "name": "李四"}]
     ner = SimpleEntity(entity_list)
     sentence = "张三给了李四一个苹果"
     ret = ner.ner(sentence)
@@ -81,8 +83,9 @@ def task_ner_test(args=None):
     ret = ner.ner(sentence)
     logging.info(json.dumps(ret, ensure_ascii=False, indent=4))
 
+
 if __name__ == "__main__":
-    logging.basicConfig(format='[%(levelname)s][%(asctime)s][%(module)s][%(funcName)s][%(lineno)s] %(message)s', level=logging.DEBUG)
+    logging.basicConfig(format='[%(levelname)s][%(asctime)s][%(module)s][%(funcName)s][%(lineno)s] %(message)s', level=logging.DEBUG)  # noqa
 
     main_subtask(__name__)
 
