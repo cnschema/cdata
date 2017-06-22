@@ -199,7 +199,7 @@ def stat(items, unique_fields, value_fields=[], printCounter=True):
                 unique_counter[field].append(item[field])
         for field in value_fields:
             value = item.get(field)
-            if value:
+            if value is not None and len(str(value)) > 0:
                 counter[u"{}_{}".format(field, value)] += 1
 
     for field in unique_fields:

@@ -5,7 +5,8 @@ History
 
 0.1.1 (2017-06-22)
 ++++++++++++++++++
-* add module entity with SimpleEntity.ner() 
+* add module entity with SimpleEntity.ner( text )
+* add module region with RegionEntity.guess_all( [address, name]) 
 
 0.1.0 (2017-06-19)
 ++++++++++++++++++

@@ -53,9 +53,11 @@ def json2excel(items, keys, filename, page_size=60000):
     wb.save(filename)
 
 
-def excel2json(filename, non_empty_col=0, file_contents=None):
+def excel2json(filename, non_empty_col=-1, file_contents=None):
     """
         http://www.lexicon.net/sjmachin/xlrd.html
+        non_empty_col is -1 to load all rows, when set to a none-empty value,
+        this function will skip rows having empty cell on that col.
     """
 
     if file_contents:

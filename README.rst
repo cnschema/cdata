@@ -72,7 +72,7 @@ web stuff
 entity manipulation
 -------------
 
-* SimpleEntity.ner()
+* entity.SimpleEntity.ner()
 
 .. code-block:: python
 
@@ -82,8 +82,46 @@ entity manipulation
   sentence = "张三给了李四一个苹果"
   ret = ner.ner(sentence)
   logging.info(json.dumps(ret, ensure_ascii=False, indent=4))
+  """
+  [{
+      "text": "张三",
+      "entities": [
+          {
+              "@id": "1",
+              "name": "张三"
+          }
+      ],
+      "index": 0
+  },
+  {
+      "text": "李四",
+      "entities": [
+          {
+              "@id": "2",
+              "name": "李四"
+          }
+      ],
+      "index": 4
+  }]
+  """
 
+* region.RegionEntity.guess_all()
 
+.. code-block:: python
+
+  from cdata.region import RegionEntity
+  addresses = ["北京海淀区阜成路52号（定慧寺）", "北京大学肿瘤医院"]
+
+  result = city_data.guess_all(addresses)
+  logging.info(json.dumps(result, ensure_ascii=False))
+  """
+     {"province": "北京市",
+     "city": "市辖区",
+     "name": "海淀区",
+     "district": "海淀区",
+     "cityid": "110108",
+     "type": "district"}
+  """
 misc
 -------------
 
