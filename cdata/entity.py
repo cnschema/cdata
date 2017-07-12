@@ -71,41 +71,36 @@ class SimpleEntity():
             word_index += len(segment)
         return ret
 
-    # 提取语料列表中的主要的实体
-    def get_primary_entity(self, sentence_list, threshold=0.24):
-        if not sentence_list:
+    # 提取文本列表中主要的实体
+    def get_primary_entity(self, text_list, threshold=0.24):
+        if not text_list:
             return []
 
-        # 计算各个词在每个句子中出现的频率
+        # 统计各个实体在每个文本中出现的频率
         counter_list = []
-        for sentence in sentence_list:
+        for sentence in text_list:
             ret = self.ner(sentence)
             if ret:
                 counter = collections.Counter()
                 length = len(ret)
                 for entity in ret:
-                    counter[entity["text"]] += 1
-                for name in counter:
-                    counter[name] = counter[name] * 1.0 / length
+                    counter[entity["text"]] += 1.0 / length
                 counter_list.append(counter)
 
-        # 频率相加，归一化处理
+        # 各个文本中同一实体的频率相加，归一化处理
         sum_counter = collections.Counter()
         for counter in counter_list:
-            for text in counter:
-                sum_counter[text] += counter[text]
-
-        for text in sum_counter:
-            sum_counter[text] = sum_counter[text] / len(sentence_list)
+            for name in counter:
+                sum_counter[name] += counter[name] / len(text_list)
 
         result_entity_list = []
-        sorted_counter = sorted(sum_counter.items(), lambda x, y: cmp(y[1], x[1]))  # 按照分数从大到小排序
-        for text, score in sorted_counter:
+        sorted_counter = sum_counter.most_common() # 按照分数从大到小排序
+        for name, score in sorted_counter:
             if score >= threshold:
                 tmp = {
-                    "text": text,
+                    "text": name,
                     "score": score,
-                    "entity": self.entities[text]
+                    "entity": self.entities[name]
                 }
                 result_entity_list.append(tmp)
             else:
