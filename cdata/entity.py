@@ -71,6 +71,7 @@ class SimpleEntity():
             word_index += len(segment)
         return ret
 
+    # 提取语料列表中的主要的实体
     def get_primary_entity(self, sentence_list, threshold=0.24):
         if not sentence_list:
             return []
@@ -80,7 +81,7 @@ class SimpleEntity():
         for sentence in sentence_list:
             ret = self.ner(sentence)
             if ret:
-                counter = collections.defaultdict(float)
+                counter = collections.Counter()
                 length = len(ret)
                 for entity in ret:
                     counter[entity["text"]] += 1
@@ -89,7 +90,7 @@ class SimpleEntity():
                 counter_list.append(counter)
 
         # 频率相加，归一化处理
-        sum_counter = collections.defaultdict(float)
+        sum_counter = collections.Counter()
         for counter in counter_list:
             for text in counter:
                 sum_counter[text] += counter[text]
