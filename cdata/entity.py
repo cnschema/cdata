@@ -71,6 +71,47 @@ class SimpleEntity():
             word_index += len(segment)
         return ret
 
+    
+    def get_primary_entity(self,sentence_list,threshold=0.24):
+        if not sentence_list:
+            return []
+
+        #计算各个词在每个句子中出现的频率
+        counter_list = []
+        for sentence in sentence_list:
+            ret = self.ner(sentence)
+            if ret:
+                counter = collections.defaultdict(float)
+                length = len(ret)
+                for entity in ret:
+                    counter[entity["text"]] += 1
+                for name in counter:
+                    counter[name] = counter[name]*1.0/length
+                counter_list.append(counter)
+
+        #频率相加，归一化处理
+        sum_counter = collections.defaultdict(float)
+        for counter in counter_list:
+            for text in counter:
+                sum_counter[text] += counter[text]
+
+        for text in sum_counter:
+            sum_counter[text] = sum_counter[text]/len(sentence_list)
+
+        result_entity_list = []
+        sorted_counter = sorted(sum_counter.items(),lambda x,y:cmp(y[1],x[1]))   #按照分数从大到小排序
+        for text,score in sorted_counter:
+            if score>=threshold:
+                tmp = {
+                    "text":text,
+                    "score":score,
+                    "entity":self.entities[text]
+                }
+                result_entity_list.append(tmp)
+            else:
+                break
+        return  result_entity_list
+
 
 def task_ner_test(args=None):
     entity_list = [{"@id": "1", "name": "张三"}, {"@id": "2", "name": "李四"}]
