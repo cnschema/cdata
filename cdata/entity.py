@@ -71,12 +71,11 @@ class SimpleEntity():
             word_index += len(segment)
         return ret
 
-    
-    def get_primary_entity(self,sentence_list,threshold=0.24):
+    def get_primary_entity(self, sentence_list, threshold=0.24):
         if not sentence_list:
             return []
 
-        #计算各个词在每个句子中出现的频率
+        # 计算各个词在每个句子中出现的频率
         counter_list = []
         for sentence in sentence_list:
             ret = self.ner(sentence)
@@ -86,31 +85,31 @@ class SimpleEntity():
                 for entity in ret:
                     counter[entity["text"]] += 1
                 for name in counter:
-                    counter[name] = counter[name]*1.0/length
+                    counter[name] = counter[name] * 1.0 / length
                 counter_list.append(counter)
 
-        #频率相加，归一化处理
+        # 频率相加，归一化处理
         sum_counter = collections.defaultdict(float)
         for counter in counter_list:
             for text in counter:
                 sum_counter[text] += counter[text]
 
         for text in sum_counter:
-            sum_counter[text] = sum_counter[text]/len(sentence_list)
+            sum_counter[text] = sum_counter[text] / len(sentence_list)
 
         result_entity_list = []
-        sorted_counter = sorted(sum_counter.items(),lambda x,y:cmp(y[1],x[1]))   #按照分数从大到小排序
-        for text,score in sorted_counter:
-            if score>=threshold:
+        sorted_counter = sorted(sum_counter.items(), lambda x, y: cmp(y[1], x[1]))  # 按照分数从大到小排序
+        for text, score in sorted_counter:
+            if score >= threshold:
                 tmp = {
-                    "text":text,
-                    "score":score,
-                    "entity":self.entities[text]
+                    "text": text,
+                    "score": score,
+                    "entity": self.entities[text]
                 }
                 result_entity_list.append(tmp)
             else:
                 break
-        return  result_entity_list
+        return result_entity_list
 
 
 def task_ner_test(args=None):
@@ -124,9 +123,13 @@ def task_ner_test(args=None):
     ret = ner.ner(sentence)
     logging.info(json.dumps(ret, ensure_ascii=False, indent=4))
 
+    sentence_list = ["张三给了李四一个苹果","王五给了李四一个橘子"]
+    primary_entity = ner.get_primary_entity(sentence_list)
+    logging.info(json.dumps(primary_entity, ensure_ascii=False, indent=4))
 
 if __name__ == "__main__":
-    logging.basicConfig(format='[%(levelname)s][%(asctime)s][%(module)s][%(funcName)s][%(lineno)s] %(message)s', level=logging.DEBUG)  # noqa
+    logging.basicConfig(format='[%(levelname)s][%(asctime)s][%(module)s][%(funcName)s][%(lineno)s] %(message)s',
+                        level=logging.DEBUG)  # noqa
 
     main_subtask(__name__)
 
