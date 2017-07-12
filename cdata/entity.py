@@ -110,7 +110,7 @@ class SimpleEntity():
             else:
                 break
         return result_entity_list
-
+    
 
 def task_ner_test(args=None):
     entity_list = [{"@id": "1", "name": "张三"}, {"@id": "2", "name": "李四"}]
@@ -127,9 +127,9 @@ def task_ner_test(args=None):
     primary_entity = ner.get_primary_entity(sentence_list)
     logging.info(json.dumps(primary_entity, ensure_ascii=False, indent=4))
 
+
 if __name__ == "__main__":
-    logging.basicConfig(format='[%(levelname)s][%(asctime)s][%(module)s][%(funcName)s][%(lineno)s] %(message)s',
-                        level=logging.DEBUG)  # noqa
+    logging.basicConfig(format='[%(levelname)s][%(asctime)s][%(module)s][%(funcName)s][%(lineno)s] %(message)s', level=logging.DEBUG)  # noqa
 
     main_subtask(__name__)
 
