@@ -5,7 +5,6 @@ cdata
 
 install
 -------------
-.. code-block:: python
   pip install cdata
 
 
