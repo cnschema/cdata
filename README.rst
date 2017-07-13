@@ -8,7 +8,7 @@ json data manipulation
 -------------
 
 * json (and json stream) file IO, e.g.  items2file(...)
-* json data access, e.g. json_get(...)
+* json data access, e.g. json_get(...), any2utf8, json_dict_copy
 * json array statistics, e.g. stat(...)
 
 .. code-block:: python
@@ -17,6 +17,16 @@ json data manipulation
   the_input = {"hello": u"世界"}
   the_output = any2utf8(the_input)
   logging.info((the_input, the_output))
+
+
+.. code-block:: python
+  property_list = [
+      { "name":"name", "alternateName": ["name","title"]},
+      { "name":"birthDate", "alternateName": ["dob","dateOfBirth"] },
+      { "name":"description" }
+  ]
+  json_object = {"dob":"2010-01-01","title":"John","interests":"data","description":"a person"}
+  ret = json_dict_copy(json_object, property_list)
 
 
 table data manipulation
