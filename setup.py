@@ -22,7 +22,7 @@ setup(name='cdata',
       license='Apache 2.0',
       packages=['cdata'],
       install_requires=[
-          'xlrd', 'xlwt', 'jieba'
+          'xlrd', 'xlwt', 'jieba', 'requests','wikipedia'
       ],
       test_suite='nose.collector',
       tests_require=['nose'],

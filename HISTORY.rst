@@ -2,11 +2,16 @@
 
 History
 -------
+0.1.3 (2017-07-14)
+++++++++++++++++++
+* add module wikify with wikidata_search, wikidata_get
+* update module core with json_dict_copy
+* update modele entity with get_primary_entity
 
 0.1.1 (2017-06-22)
 ++++++++++++++++++
 * add module entity with SimpleEntity.ner( text )
-* add module region with RegionEntity.guess_all( [address, name]) 
+* add module region with RegionEntity.guess_all( [address, name])
 
 0.1.0 (2017-06-19)
 ++++++++++++++++++
