@@ -3,6 +3,11 @@ cdata
 
 "see data", see data, handy snippets for conversion, cleaning and integration.
 
+install
+-------------
+.. code-block:: shell
+  pip install cdata
+
 
 json data manipulation
 -------------
@@ -132,6 +137,23 @@ entity manipulation
      "cityid": "110108",
      "type": "district"}
   """
+
+wikification
+-------------
+
+* 通过wikidata搜索，定位对应实体，查找实体中文名，别名等属性。wikidata_search (item/property) and wikidata_get
+
+.. code-block:: python
+
+  query = u"居里夫人"
+  ret = wikidata_search(query, lang="zh")
+  logging.info(ret)
+
+  nodeid = ret["itemList"][0]["identifier"]
+  ret = wikidata_get(nodeid)
+  lable_zh = ret["entities"][nodeid]["labels"]["zh"]["value"]
+  logging.info(lable_zh)
+
 
 misc
 -------------
