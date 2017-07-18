@@ -126,6 +126,7 @@ entity manipulation
   from cdata.region import RegionEntity
   addresses = ["北京海淀区阜成路52号（定慧寺）", "北京大学肿瘤医院"]
 
+  city_data = RegionEntity()
   result = city_data.guess_all(addresses)
   logging.info(json.dumps(result, ensure_ascii=False))
   """

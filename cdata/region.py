@@ -293,9 +293,10 @@ class RegionEntity():
             # print pcompact
             return pcompact
 
-    def __init__(self):
+    def __init__(self, strict_mode=True):
         data = file2json(file2abspath('region_data.json', __file__))
         counter = collections.Counter()
+        self.strict_mode = strict_mode
 
         self.data = {
             'items': {},  # 原始数据，基于cityid（多种指代，可以市省，市，区县级别）
@@ -399,7 +400,7 @@ class RegionEntity():
                 item["type"] = "district"
                 item["name"] = d
                 map_district[d].add(item['cityid'])
-        assert 2819 == len(map_district), len(map_district)
+        assert 2820 == len(map_district), len(map_district)
 
         for p in sorted(list(map_district)):
             alias_list = normalize_district(p)
@@ -450,12 +451,14 @@ class RegionEntity():
             if len(alias) == 1:
                 logging.error(json.dumps(
                     entities, ensure_ascii=False, indent=4, sort_keys=True))
-                exit()
+                if self.strict_mode:
+                    exit()
 
             if alias in [u'自治']:
                 logging.error(json.dumps(
                     entities, ensure_ascii=False, indent=4, sort_keys=True))
-                exit()
+                if self.strict_mode:
+                    exit()
 
             if len(entities) > 1:
                 counter["one-alias-many-entities"] += 1
@@ -504,7 +507,8 @@ class RegionEntity():
             logging.error("cannot find reigion name")
             logging.error(name)
             logging.error(xtype)
-            exit(0)
+            if self.strict_mode:
+                exit(0)
 
         matched = []
         for cityid in cityid_list:
@@ -721,6 +725,7 @@ def task_guess_all(args=None):
     addresses = ["", "北京同仁堂广州药业连锁有限公司农林店"]
     addresses = ["北京海淀区阜成路52号（定慧寺）", "北京大学肿瘤医院"]
     addresses = ["水东镇东阳北街50号", "水东镇长安药店（已迁入三角所）"]
+    addresses = ["保定市长城北大街头台村2109号门脸", "保定市莲池区中昊翔启蒙大药房"]
 
     result = city_data.guess_all(addresses)
     if result:

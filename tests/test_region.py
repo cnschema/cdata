@@ -47,6 +47,11 @@ class EntityTestCase(unittest.TestCase):
         assert u"乌兰察布市" == city_info.get("city")
         assert u"丰镇市" == city_info.get("district")
 
+        city_info = self.ner.guess_all(["保定市长城北大街头台村2109号门脸", "保定市莲池区中昊翔启蒙大药房"])
+        assert u"district" == city_info.get("type")
+        assert u"河北省" == city_info.get("province")
+        assert u"保定市" == city_info.get("city")
+
         city_info = self.ner.guess_all([u"高州市平山木禾塘大塘村"])
         assert u"district" == city_info.get("type")
         assert u"广东省" == city_info.get("province")

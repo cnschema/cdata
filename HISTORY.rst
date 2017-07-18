@@ -2,11 +2,12 @@
 
 History
 -------
-0.1.3 (2017-07-14)
+0.1.3 (2017-07-17)
 ++++++++++++++++++
 * add module wikify with wikidata_search, wikidata_get
 * update module core with json_dict_copy
 * update modele entity with get_primary_entity
+* add one more district in region, add strict_mode for skipping exit() on error
 
 0.1.1 (2017-06-22)
 ++++++++++++++++++
