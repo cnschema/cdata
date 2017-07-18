@@ -7,7 +7,7 @@ def readme():
 
 
 setup(name='cdata',
-      version='0.1.3',
+      version='0.1.4',
       description='see data, handy snippets for conversion, and ETL.',
       long_description=readme(),
       classifiers=[
@@ -24,6 +24,7 @@ setup(name='cdata',
       install_requires=[
           'xlrd', 'xlwt', 'jieba', 'requests','wikipedia'
       ],
+      data_files = [('', ['cdata/region_data.json'])],
       test_suite='nose.collector',
       tests_require=['nose'],
       zip_safe=False)

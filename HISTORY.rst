@@ -2,7 +2,7 @@
 
 History
 -------
-0.1.3 (2017-07-17)
+0.1.4 (2017-07-17)
 ++++++++++++++++++
 * add module wikify with wikidata_search, wikidata_get
 * update module core with json_dict_copy
