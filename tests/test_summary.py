@@ -23,10 +23,7 @@ class SummaryTestCase(unittest.TestCase):
             "accomplishment": u"三好学生"
         }
         ret = summarize_entity_person(person)
-        assert u"张三，主要成就是三好学生" == ret, ret
-
-
-
+        assert u"张三，主要成就是三好学生。" == ret
 
 if __name__ == '__main__':
     unittest.main()
