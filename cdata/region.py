@@ -400,7 +400,7 @@ class RegionEntity():
                 item["type"] = "district"
                 item["name"] = d
                 map_district[d].add(item['cityid'])
-        assert 2820 == len(map_district), len(map_district)
+        assert 2821 == len(map_district), len(map_district)
 
         for p in sorted(list(map_district)):
             alias_list = normalize_district(p)
@@ -490,7 +490,8 @@ class RegionEntity():
             setattr(self, "normalizeRegion_mapped", collections.Counter())
         mapped = getattr(self, "normalizeRegion_mapped")
 
-        name = re.sub(u"[省市]+$", "", name)
+        if len(name) > 2:
+            name = re.sub(u"[省市]+$", "", name)
 
         if name in [u"市辖区"]:
             return name

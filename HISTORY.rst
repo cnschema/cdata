@@ -2,6 +2,11 @@
 
 History
 -------
+0.1.5 (2017-07-18)
+++++++++++++++++++
+* bugfix, normalize_region_name
+* pack region data with code
+
 0.1.4 (2017-07-17)
 ++++++++++++++++++
 * add module wikify with wikidata_search, wikidata_get

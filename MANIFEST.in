@@ -1,2 +1,3 @@
 include README.rst
 include cdata/region_data.json
+include cdata/region_dict.txt

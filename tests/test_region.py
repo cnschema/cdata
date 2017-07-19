@@ -31,6 +31,7 @@ class EntityTestCase(unittest.TestCase):
         assert u"海淀区" == self.ner.normalize_region_name(u"海淀", "district")
         assert u"浦东新区" == self.ner.normalize_region_name(u"浦东", "district")
         assert u"浦东新区" == self.ner.normalize_region_name(u"浦东新区", "district")
+        assert u"芒市" == self.ner.normalize_region_name(u"芒市", "district")
 
         assert u"上海" == self.ner.guess_province([u"上海西红柿集团"])
         assert u"上海" == self.ner.guess_province([u"浦东新区软件园"])
