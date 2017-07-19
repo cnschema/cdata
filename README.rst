@@ -3,12 +3,16 @@ cdata
 
 "see data", see data, handy snippets for conversion, cleaning and integration.
 
+install
+-------------
+  pip install cdata
+
 
 json data manipulation
 -------------
 
 * json (and json stream) file IO, e.g.  items2file(...)
-* json data access, e.g. json_get(...)
+* json data access, e.g. json_get(...), any2utf8, json_dict_copy
 * json array statistics, e.g. stat(...)
 
 .. code-block:: python
@@ -17,6 +21,16 @@ json data manipulation
   the_input = {"hello": u"世界"}
   the_output = any2utf8(the_input)
   logging.info((the_input, the_output))
+
+
+.. code-block:: python
+  property_list = [
+      { "name":"name", "alternateName": ["name","title"]},
+      { "name":"birthDate", "alternateName": ["dob","dateOfBirth"] },
+      { "name":"description" }
+  ]
+  json_object = {"dob":"2010-01-01","title":"John","interests":"data","description":"a person"}
+  ret = json_dict_copy(json_object, property_list)
 
 
 table data manipulation
@@ -112,6 +126,7 @@ entity manipulation
   from cdata.region import RegionEntity
   addresses = ["北京海淀区阜成路52号（定慧寺）", "北京大学肿瘤医院"]
 
+  city_data = RegionEntity()
   result = city_data.guess_all(addresses)
   logging.info(json.dumps(result, ensure_ascii=False))
   """
@@ -122,6 +137,23 @@ entity manipulation
      "cityid": "110108",
      "type": "district"}
   """
+
+wikification
+-------------
+
+* 通过wikidata搜索，定位对应实体，查找实体中文名，别名等属性。wikidata_search (item/property) and wikidata_get
+
+.. code-block:: python
+
+  query = u"居里夫人"
+  ret = wikidata_search(query, lang="zh")
+  logging.info(ret)
+
+  nodeid = ret["itemList"][0]["identifier"]
+  ret = wikidata_get(nodeid)
+  lable_zh = ret["entities"][nodeid]["labels"]["zh"]["value"]
+  logging.info(lable_zh)
+
 
 misc
 -------------

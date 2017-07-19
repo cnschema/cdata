@@ -7,7 +7,7 @@ def readme():
 
 
 setup(name='cdata',
-      version='0.1.2',
+      version='0.1.5',
       description='see data, handy snippets for conversion, and ETL.',
       long_description=readme(),
       classifiers=[
@@ -22,8 +22,9 @@ setup(name='cdata',
       license='Apache 2.0',
       packages=['cdata'],
       install_requires=[
-          'xlrd', 'xlwt', 'jieba'
+          'xlrd', 'xlwt', 'jieba', 'requests','wikipedia'
       ],
+      package_data = {'': ['cdata/*.json','cdata/*.txt']},
       test_suite='nose.collector',
       tests_require=['nose'],
       zip_safe=False)

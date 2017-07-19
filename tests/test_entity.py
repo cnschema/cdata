@@ -37,6 +37,14 @@ class EntityTestCase(unittest.TestCase):
         ret = ner.ner(sentence)
         assert len(ret) == 1
 
-
+    def test_get_primary_entity(self):
+        entity_list = [{"@id": "1", "name": u"张三"},
+                       {"@id": "2", "name": u"李四"}]
+        ner = SimpleEntity(entity_list)
+        sentence_list = ["张三给了李四一个苹果", "王五给了李四一个橘子"]
+        # 张三:0.75  李四：0.25
+        primary_entity = ner.get_primary_entity(sentence_list,0.4)
+        assert len(primary_entity) == 1
+        
 if __name__ == '__main__':
     unittest.main()

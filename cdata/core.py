@@ -11,7 +11,6 @@ import logging
 import codecs
 import hashlib
 import datetime
-import logging
 import time
 import argparse
 import urlparse
@@ -19,7 +18,7 @@ import re
 import collections
 
 # global constants
-VERSION = 'v20170619'
+VERSION = 'v20170713'
 CONTEXTS = [os.path.basename(__file__), VERSION]
 
 ####################################
@@ -123,6 +122,29 @@ def json_get_list(json_object, p):
     else:
         return [v]
 
+def json_dict_copy(json_object, property_list, defaultValue=None):
+    """
+        property_list = [
+            { "name":"name", "alternateName": ["name","title"]},
+            { "name":"birthDate", "alternateName": ["dob","dateOfBirth"] },
+            { "name":"description" }
+        ]
+    """
+    ret = {}
+    for prop in property_list:
+        p_name = prop["name"]
+        for alias in prop.get("alternateName",[]):
+            if json_object.get(alias) is not None:
+                ret[p_name] = json_object.get(alias)
+                break
+        if not p_name in ret:
+            if p_name in json_object:
+                ret[p_name] = json_object[p_name]
+            elif defaultValue is not None:
+                ret[p_name] = defaultValue
+
+    return ret
+
 ####################################
 # data conversion
 
@@ -142,6 +164,8 @@ def any2utf8(data):
     elif type(data) == unicode:
         return data.encode("utf-8")
     elif type(data) in [str, basestring]:
+        return data
+    elif type(data) in [int, float]:
         return data
     else:
         logging.error("unexpected {} {}".format(type(data), data))
@@ -164,6 +188,8 @@ def any2unicode(data):
         return data
     elif type(data) in [str, basestring]:
         return data.decode("utf-8")
+    elif type(data) in [int, float]:
+        return data
     else:
         logging.error("unexpected {} {}".format(type(data), data))
         return data

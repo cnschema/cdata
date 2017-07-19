@@ -95,6 +95,10 @@ class CoreTestCase(unittest.TestCase):
         tout = any2utf8(tin)
         logging.info((tin, tout))
 
+        tin = {"hello": u"世界", "number": 90}
+        tout = any2utf8(tin)
+        logging.info((tin, tout))
+
     def test_any2unicode(self):
         tin = "你好世界"
         tout = any2unicode(tin)
@@ -137,6 +141,18 @@ class CoreTestCase(unittest.TestCase):
         tout = any2sha1(tin)
         assert "d3b09abe30cfe2edff4ee9e0a141c93bf5b3af87" == tout, tout
 
+    def test_json_dict_copy(self):
+        property_list = [
+            { "name":"name", "alternateName": ["name","title"]},
+            { "name":"birthDate", "alternateName": ["dob","dateOfBirth"] },
+            { "name":"description" }
+        ]
+        json_object = {"dob":"2010-01-01","title":"John","interests":"data","description":"a person"}
+        ret = json_dict_copy(json_object, property_list)
+        assert json_object["title"] == ret["name"]
+        assert json_object["dob"] == ret["birthDate"]
+        assert json_object["description"] == ret["description"]
+        assert ret.get("interests") is None
 
 if __name__ == '__main__':
     unittest.main()
