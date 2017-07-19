@@ -76,7 +76,7 @@ def summarize_entity_person(person):
 
     value = person.get("authorOf")
     if value:
-        ret.append(u'主要作品是{}'.format(value))
+        ret.append(u'主要作品有{}'.format(value))
 
     value = person.get("accomplishment")
     if value and len(value) < 30:
