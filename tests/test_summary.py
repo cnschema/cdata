@@ -23,7 +23,7 @@ class SummaryTestCase(unittest.TestCase):
             "accomplishment": u"三好学生"
         }
         ret = summarize_entity_person(person)
-        assert u"张三，主要成就是三好学生。" == ret
+        assert u"张三，主要成就：三好学生。" == ret
 
     def test_real_data(self):
         person = {
@@ -59,6 +59,26 @@ class SummaryTestCase(unittest.TestCase):
         }
         ret = summarize_entity_person(person)
         assert u"陈小群，中国教授。" == ret
+
+        # Test for bracket, unknown birth date, courtesy name
+        person = {
+        "@id": u"2d8d5ed9-108b-3621-86bd-6c67fbbf0896",
+        "@type": u"Person,Thing",
+        "accomplishment": u"袭龙城，收复河朔、河套地区，击败单于",
+        "birthDate": u"不详",
+        "birthPlace": u"河东平阳（今山西临汾市）",
+        "courtesyName": u"仲卿",
+        "deathDate": u"公元前106年（汉武帝元封五年）",
+        "description": u"卫青，字仲卿，河东平阳人",
+        "dynasty": u"西汉",
+        "ethnicGroup": u"汉族",
+        "image": "http://c.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=dce9ce450f3387449cc5287a6934bec4/d53f8794a4c27d1ef8d6abd118d5ad6eddc43836.jpg",
+        "name": u"卫青",
+        "posthumousName": u"烈"
+        }
+
+        summary = u"卫青，字仲卿，西汉人，出生于河东平阳，主要成就：袭龙城，收复河朔、河套地区，击败单于。"
+        assert summary == summarize_entity_person(person)
 
 if __name__ == '__main__':
     unittest.main()

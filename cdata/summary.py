@@ -36,7 +36,7 @@ def summarize_entity_person(person):
 
     value = person.get("courtesyName")
     if value:
-        ret.append(u'字{}'.format(value[0]))
+        ret.append(u'字{}'.format(value))
 
     value = person.get("alternateName")
     if value:
@@ -58,6 +58,11 @@ def summarize_entity_person(person):
 
     birth_date = person.get("birthDate", "")
     birth_place = person.get("birthPlace", "")
+
+    # Special case for unknown birth date
+    if birth_date == u"不详":
+        birth_date = ""
+
     if birth_place:
         ret.append(u'{}出生于{}'.format(birth_date, birth_place))
     elif birth_date:
@@ -76,14 +81,20 @@ def summarize_entity_person(person):
 
     value = person.get("accomplishment")
     if value and len(value) < 30:
-        ret.append( u"主要成就是{}".format(value) )
+        # Colon is handled by text reading software
+        ret.append( u"主要成就：{}".format(value) )
 
     ret = u"，".join(ret)
+
+    # Make all commas Chinese
+    ret = ret.replace(u',', u'，')
     ret = re.sub(u"，+", u"，", ret) # Removes repeat commas
     # Handles periods at end
     ret = re.sub(u"[。，]+$", u"", ret)
-    ret = ''.join([ret, u"。"])
+    # Removes brackets
+    ret = re.sub(ur"\（[\s\S]*\）", u"", ret)
 
+    ret = ''.join([ret, u"。"])
 
     return ret
 
