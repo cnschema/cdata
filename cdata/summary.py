@@ -33,8 +33,13 @@ def summarize_entity_person(person):
     ret.append(value)
 
     value = person.get("courtesyName")
+    if value == u"不详":
+        value = ""
     if value:
-        ret.append(u'字{}'.format(value))
+        if type(value) == list:
+            ret.append(u'字{}'.format(value[0]))
+        else:
+            ret.append(u'字{}'.format(value))
 
     value = person.get("alternateName")
     if value:
@@ -44,7 +49,10 @@ def summarize_entity_person(person):
 
     value = person.get("artName")
     if value:
-        ret.append(u'号{}'.format(value))
+        if type(value) == list:
+            ret.append(u'号{}'.format(value[0]))
+        else:
+            ret.append(u'号{}'.format(value))
 
     value = person.get("dynasty")
     if value:
