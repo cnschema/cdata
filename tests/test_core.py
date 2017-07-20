@@ -74,6 +74,18 @@ class CoreTestCase(unittest.TestCase):
         assert json_get_list(json_data, "name") == ["john"]
         assert json_get_list(json_data, "birthPlace") == ["Beijing"]
 
+    def test_json_get_first_item(self):
+
+        json_data = {
+            "name": "john",
+            "birthPlace": ["Beijing"],
+            "interests": []
+        }
+        assert json_get_first_item(json_data, "name") == "john"
+        assert json_get_first_item(json_data, "birthPlace") == "Beijing"
+        assert json_get_first_item(json_data, "birthDate") is None
+        assert json_get_first_item(json_data, "interests") is None
+
     def test_any2utf8(self):
         tin = "你好世界"
         tout = any2utf8(tin)

@@ -122,6 +122,17 @@ def json_get_list(json_object, p):
     else:
         return [v]
 
+def json_get_first_item(json_object, p):
+    v = json_object.get(p, [])
+    if type(v) == list:
+        if len(v) > 0:
+            return v[0]
+        else:
+            return None
+    else:
+        return v
+
+
 def json_dict_copy(json_object, property_list, defaultValue=None):
     """
         property_list = [

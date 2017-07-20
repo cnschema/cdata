@@ -25,6 +25,22 @@ class SummaryTestCase(unittest.TestCase):
         ret = summarize_entity_person(person)
         assert u"张三，主要成就：三好学生。" == ret
 
+        person = {
+            "name": u"张三",
+            "accomplishment": u"三好学生",
+            "artName": [u"张老三"]
+        }
+        ret = summarize_entity_person(person)
+        assert u"张三，号张老三，主要成就：三好学生。" == ret
+
+        person = {
+            "name": u"张三",
+            "accomplishment": u"三好学生",
+            "artName": []
+        }
+        ret = summarize_entity_person(person)
+        assert u"张三，主要成就：三好学生。" == ret
+
     def test_real_data(self):
         person = {
         "description": u"黄健中，1941年12月29日出生于印度尼西亚泗水，国家一级导演、编剧、艺术指导。1979年，黄健中与张铮联合执导爱情片《小花》，该片获得第三届电影百花奖上获最佳故事片奖 。1982年，黄健中独立执导首部电影作品——爱情片《如意》。1985年，凭借家庭剧《良家妇女》获得第二十五届卡罗维·发利国际电影节主要奖[2-3] 。1990年，拍摄警匪剧《龙年警官》，该片获得第十四届大众电影百花奖最佳故事片奖。1991年，拍摄家庭剧《过年》，该片获得第十五届大众电影百花奖最佳故事片奖。1995年，执导剧情片《大鸿米店》[4-6] 。1998年，拍摄爱情片《红娘》，该片获得第二十二届大众电影百花奖最佳故事片奖[7-8] 。2001年，执导古装武侠剧《笑傲江湖》 。2003年，与佐藤纯弥联合执导家庭犯罪剧《世纪末的晚钟》[10-12] 。2005年，国家广播电影电视总局授予黄健中“优秀电影艺术家”称号 。2006年，执导古装历史剧《越王勾践》 。2009年，拍摄历史战争剧《大秦帝国之裂变》，该片获得第25届中国电视金鹰奖[14-17] 。2011年，执导古装剧《大风歌》[18-19] 。2013年，执导古装神话剧《蓬莱八仙》[20-22] 。",
@@ -42,7 +58,8 @@ class SummaryTestCase(unittest.TestCase):
         "occupation": u"导演、编剧、艺术指导，" # Extra comma for punctuation testing
         }
         ret = summarize_entity_person(person)
-        assert u"黄健中，1941年12月29日出生于印度尼西亚泗水，中国导演、编剧、艺术指导，主要作品有过年、龙年警官、越王勾践、大风歌。" == ret
+        logging.info(ret)
+        assert u"黄健中，1941年12月29日出生于印度尼西亚泗水，中国导演、编剧、艺术指导，主要作品：过年、龙年警官、越王勾践、大风歌。" == ret
 
         person = {
         "name": u"陈小群",

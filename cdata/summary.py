@@ -32,14 +32,12 @@ def summarize_entity_person(person):
         return False
     ret.append(value)
 
-    value = person.get("courtesyName")
+    prop = "courtesyName"
+    value = json_get_first_item(person, prop)
     if value == u"不详":
         value = ""
     if value:
-        if type(value) == list:
-            ret.append(u'字{}'.format(value[0]))
-        else:
-            ret.append(u'字{}'.format(value))
+        ret.append(u'字{}'.format(value))
 
     value = person.get("alternateName")
     if value:
@@ -47,18 +45,17 @@ def summarize_entity_person(person):
         # Bugged
         pass
 
-    value = person.get("artName")
+    prop = "artName"
+    value = json_get_first_item(person, prop)
     if value:
-        if type(value) == list:
-            ret.append(u'号{}'.format(value[0]))
-        else:
-            ret.append(u'号{}'.format(value))
+        ret.append(u'号{}'.format(value))
 
     value = person.get("dynasty")
     if value:
         ret.append(u'{}人'.format(value))
 
-    value = person.get("ancestralHome")
+    prop = "ancestralHome"
+    value = json_get_first_item(person, prop)
     if value:
         ret.append(u'祖籍{}'.format(value))
 
@@ -74,21 +71,29 @@ def summarize_entity_person(person):
     elif birth_date:
         ret.append(u'{}出生'.format(birth_date))
 
-    nationality = person.get("nationality", "")
-    occupation = person.get("occupation", "")
+    prop = "nationality"
+    nationality = json_get_first_item(person, prop)
+    prop = "occupation"
+    occupation = json_get_first_item(person, prop)
     if occupation:
         ret.append(u'{}{}'.format(nationality, occupation))
     elif nationality:
         ret.append(u'{}人'.format(nationality))
 
-    value = person.get("authorOf")
+    prop = "authorOf"
+    value = json_get_list(person, prop)
     if value:
-        ret.append(u'主要作品有{}'.format(value))
+        logging.info(value)
+        value = u"、".join(value)
+        ret.append(u'主要作品：{}'.format(value) )
 
-    value = person.get("accomplishment")
-    if value and len(value) < 30:
-        # Colon is handled by text reading software
-        ret.append( u"主要成就：{}".format(value) )
+    prop = "accomplishment"
+    value = json_get_list(person, prop)
+    if value:
+        value = u"、".join(value)
+        if len(value) < 30:
+            # Colon is handled by text reading software
+            ret.append( u"主要成就：{}".format(value) )
 
     ret = u"，".join(ret)
 

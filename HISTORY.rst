@@ -2,10 +2,14 @@
 
 History
 -------
+0.1.7 (2017-07-20)
+++++++++++++++++++
+* bugfix summary.summarize_entity_person 
+
 
 0.1.6 (2017-07-20)
 ++++++++++++++++++
-* add summary.summarize_entity_person function 
+* add summary.summarize_entity_person function
 
 0.1.5 (2017-07-18)
 ++++++++++++++++++
