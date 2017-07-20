@@ -2,6 +2,11 @@
 
 History
 -------
+
+0.1.6 (2017-07-20)
+++++++++++++++++++
+* add summary.summarize_entity_person function 
+
 0.1.5 (2017-07-18)
 ++++++++++++++++++
 * bugfix, normalize_region_name

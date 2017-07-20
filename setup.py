@@ -7,7 +7,7 @@ def readme():
 
 
 setup(name='cdata',
-      version='0.1.5',
+      version='0.1.6',
       description='see data, handy snippets for conversion, and ETL.',
       long_description=readme(),
       classifiers=[
