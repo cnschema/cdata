@@ -94,7 +94,7 @@ def summarize_entity_person(person):
     ret = ret.replace(u'(', u'（')
     ret = ret.replace(u')', u'）')
     # Removes brackets and all contained info
-    ret = re.sub(ur"\（[^）]*\）", u"", ret)
+    ret = re.sub(ur"（[^）]*）", u"", ret)
 
     ret = u''.join([ret, u"。"])
 
