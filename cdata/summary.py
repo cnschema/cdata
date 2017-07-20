@@ -17,9 +17,7 @@ import collections
 
 from misc import main_subtask
 from core import *
-
 from table import *
-
 
 def summarize_paragraph_person(text):
     pass
@@ -90,11 +88,15 @@ def summarize_entity_person(person):
     ret = ret.replace(u',', u'，')
     ret = re.sub(u"，+", u"，", ret) # Removes repeat commas
     # Handles periods at end
-    ret = re.sub(u"[。，]+$", u"", ret)
-    # Removes brackets
-    ret = re.sub(ur"\（[\s\S]*\）", u"", ret)
+    ret = re.sub(ur"[。，]+$", u"", ret)
 
-    ret = ''.join([ret, u"。"])
+    # Converts brackets to Chinese
+    ret = ret.replace(u'(', u'（')
+    ret = ret.replace(u')', u'）')
+    # Removes brackets and all contained info
+    ret = re.sub(ur"\（[^）]*\）", u"", ret)
+
+    ret = u''.join([ret, u"。"])
 
     return ret
 
