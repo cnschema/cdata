@@ -158,6 +158,16 @@ def json_dict_copy(json_object, property_list, defaultValue=None):
 
     return ret
 
+def json_append(obj, p, v):
+    vlist = obj.get(p, [])
+    if not isinstance(vlist, list):
+        return
+
+    if vlist:
+        vlist.append(v)
+    else:
+        obj[p] = [v]
+
 ####################################
 # data conversion
 

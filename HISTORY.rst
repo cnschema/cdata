@@ -7,6 +7,7 @@ History
 ++++++++++++++++++
 * fixed summary.summarize_entity_person, handle empty nationality situation
 * changed core.json_get_first_item, add defaultValue as empty string
+* add core.json_append, append an item to a list
 
 0.1.7 (2017-07-20)
 ++++++++++++++++++

@@ -83,8 +83,25 @@ class CoreTestCase(unittest.TestCase):
         }
         assert json_get_first_item(json_data, "name") == "john"
         assert json_get_first_item(json_data, "birthPlace") == "Beijing"
-        assert json_get_first_item(json_data, "birthDate") is None
-        assert json_get_first_item(json_data, "interests") is None
+        assert json_get_first_item(json_data, "birthDate") == ''
+        assert json_get_first_item(json_data, "interests", defaultValue=None) is None
+
+    def test_json_append(self):
+
+        json_data = {
+            "name": "john",
+            "birthPlace": ["Beijing"],
+            "interests": []
+        }
+
+        json_append(json_data, "name", "a")
+        assert json_data["name"] == "john"
+
+        json_append(json_data, "birthPlace", "a")
+        assert json_data["birthPlace"] == ["Beijing","a"]
+
+        json_append(json_data, "keywords", "a")
+        assert json_data["keywords"] == ["a"]
 
     def test_any2utf8(self):
         tin = "你好世界"
