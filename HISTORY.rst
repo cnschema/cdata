@@ -2,9 +2,15 @@
 
 History
 -------
+
+0.1.8 (2017-08-16)
+++++++++++++++++++
+* fixed summary.summarize_entity_person, handle empty nationality situation
+* changed core.json_get_first_item, add defaultValue as empty string
+
 0.1.7 (2017-07-20)
 ++++++++++++++++++
-* bugfix summary.summarize_entity_person 
+* bugfix summary.summarize_entity_person
 
 
 0.1.6 (2017-07-20)

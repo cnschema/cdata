@@ -123,13 +123,14 @@ def json_get_list(json_object, p):
         return [v]
 
 
-def json_get_first_item(json_object, p):
+def json_get_first_item(json_object, p, defaultValue=''):
+    # return empty string if the item does not exist
     v = json_object.get(p, [])
     if isinstance(v, list):
         if len(v) > 0:
             return v[0]
         else:
-            return ''
+            return defaultValue
     else:
         return v
 

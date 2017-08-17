@@ -76,7 +76,10 @@ def summarize_entity_person(person):
     prop = "occupation"
     occupation = json_get_first_item(person, prop)
     if occupation:
-        ret.append(u'{}{}'.format(nationality, occupation))
+        if nationality:
+            ret.append(u'{}{}'.format(nationality, occupation))
+        else:
+            ret.append(u'{}'.format(occupation))
     elif nationality:
         ret.append(u'{}人'.format(nationality))
 

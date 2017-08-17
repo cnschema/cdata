@@ -97,5 +97,21 @@ class SummaryTestCase(unittest.TestCase):
         summary = u"卫青，字仲卿，西汉人，出生于河东平阳，主要成就：袭龙城，收复河朔、河套地区，击败单于。"
         assert summary == summarize_entity_person(person)
 
+        person = {
+        "name": u"陈小群",
+        "gender": u"女",
+        "image": u"http://e.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=3c89cd72acc379317d68812fd3ffd078/b90e7bec54e736d16b57837c98504fc2d5626979.jpg",
+        "description": u"女，抒情女高音歌唱家，现任上海音乐学院声乐系教授、硕士生导师；先后担任文化部举办的国际声乐比赛全国选拔赛、中国音乐家协会举办的“金钟奖”全国声乐比赛、全国大学生艺术歌曲比赛等比赛评委。",
+        "@type": ["Person", "Thing"],
+        "ethnicGroup": u"汉族",
+        "keywords": [u"音乐", u"行业人物", u"歌手", u"教育", u"娱乐人物", u"人物", u"书籍"],
+        "@id": u"66548f8a-3f9e-37ca-afb1-e2e96fdb083b",
+        "alumniOf": u"上海音乐学院",
+        "occupation": u"教授"
+        }
+        ret = summarize_entity_person(person)
+        logging.info(ret)
+        assert u"陈小群，教授。" == ret
+
 if __name__ == '__main__':
     unittest.main()
