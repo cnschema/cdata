@@ -51,7 +51,7 @@ def file2iter(filename, encoding='utf-8', comment_prefix="#",
     """
     ret = list()
     visited = set()
-    with codecs.open(filename,  encoding=encoding) as f:
+    with codecs.open(filename, encoding=encoding) as f:
         for line in f:
             line = line.strip()
             # skip empty line
@@ -107,28 +107,29 @@ def json_get(json_object, property_path, default=None):
     """
     temp = json_object
     for field in property_path[:-1]:
-        if not type(temp) == dict:
+        if not isinstance(temp, dict):
             return None
         temp = temp.get(field, {})
-    if not type(temp) == dict:
+    if not isinstance(temp, dict):
         return None
     return temp.get(property_path[-1], default)
 
 
 def json_get_list(json_object, p):
     v = json_object.get(p, [])
-    if type(v) == list:
+    if isinstance(v, list):
         return v
     else:
         return [v]
 
+
 def json_get_first_item(json_object, p):
     v = json_object.get(p, [])
-    if type(v) == list:
+    if isinstance(v, list):
         if len(v) > 0:
             return v[0]
         else:
-            return None
+            return ''
     else:
         return v
 
@@ -144,7 +145,7 @@ def json_dict_copy(json_object, property_list, defaultValue=None):
     ret = {}
     for prop in property_list:
         p_name = prop["name"]
-        for alias in prop.get("alternateName",[]):
+        for alias in prop.get("alternateName", []):
             if json_object.get(alias) is not None:
                 ret[p_name] = json_object.get(alias)
                 break
@@ -164,15 +165,15 @@ def any2utf8(data):
     """
         rewrite json object values (unicode) into utf-8 encoded string
     """
-    if type(data) == dict:
+    if isinstance(data, dict):
         ret = {}
         for k, v in data.items():
             k = any2utf8(k)
             ret[k] = any2utf8(v)
         return ret
-    elif type(data) == list:
+    elif isinstance(data, list):
         return [any2utf8(x) for x in data]
-    elif type(data) == unicode:
+    elif isinstance(data, unicode):
         return data.encode("utf-8")
     elif type(data) in [str, basestring]:
         return data
@@ -187,15 +188,15 @@ def any2unicode(data):
     """
         rewrite json object values (assum utf-8) into unicode
     """
-    if type(data) == dict:
+    if isinstance(data, dict):
         ret = {}
         for k, v in data.items():
             k = any2unicode(k)
             ret[k] = any2unicode(v)
         return ret
-    elif type(data) == list:
+    elif isinstance(data, list):
         return [any2unicode(x) for x in data]
-    elif type(data) == unicode:
+    elif isinstance(data, unicode):
         return data
     elif type(data) in [str, basestring]:
         return data.decode("utf-8")
