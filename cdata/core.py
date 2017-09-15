@@ -260,3 +260,36 @@ def stat(items, unique_fields, value_fields=[], printCounter=True):
                                 indent=4, sort_keys=True))
 
     return counter
+
+def stat_jsonld(data, key=None, counter=None):
+    """
+        provide statistics for jsonld, right now only count triples
+        see also https://json-ld.org/playground/
+        note:  attributes  @id @context do not contribute any triple
+    """
+    if counter is None:
+        counter = collections.Counter()
+
+    if isinstance(data, dict):
+        ret = {}
+        for k, v in data.items():
+            stat_jsonld(v, k, counter)
+            counter[u"p_{}".format(k)] += 0
+        if key:
+            counter["triple"] += 1
+            counter[u"p_{}".format(key)] +=1
+    elif isinstance(data, list):
+        [stat_jsonld(x, key, counter) for x in data]
+        if key in ["tag"]:
+            for x in data:
+                if isinstance(x, dict) and x.get("name"):
+                    counter[u"{}_{}".format(key, x["name"])] +=1
+                elif type(x) in [basestring, unicode]:
+                    counter[u"{}_{}".format(key, x)] +=1
+
+    else:
+        if key and key not in ["@id","@context"]:
+            counter["triple"] += 1
+            counter[u"p_{}".format(key)] +=1
+
+    return counter

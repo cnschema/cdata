@@ -183,5 +183,16 @@ class CoreTestCase(unittest.TestCase):
         assert json_object["description"] == ret["description"]
         assert ret.get("interests") is None
 
+    def test_statJsonld(self):
+        tin = "test_core_stat.jsonld"
+        tout = file2abspath(tin, __file__)
+        with open(tout) as f:
+            data = json.load(f)
+            ret = stat_jsonld(data)
+            print json.dumps(ret)
+            assert ret["triple"] == 29
+            assert ret[u"tag_抒情"] == 1
+
+
 if __name__ == '__main__':
     unittest.main()
