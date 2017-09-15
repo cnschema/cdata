@@ -1,0 +1,45 @@
+{
+   "byArtist":[],
+   "name":"暧昧",
+   "keywords":["抒情"],
+   "tag":[{"name":"抒情"},{"name":"愉快"}],
+   "mergedFrom":[
+      {
+         "alternateName":[],
+         "name":"暧昧",
+         "lyricist":[],
+         "referenceUrl":"http://music.163.com/song?id=471385043",
+         "@type":"MusicRecording",
+         "durationInSeconds":312,
+         "statedIn":"music.163.com",
+         "shareCount":0,
+         "inAlbum":{
+            "identifier":"35347475",
+            "name":"暧昧",
+            "datePublished": "",
+            "image": ""
+         },
+         "composer":[],
+         "keywords":[],
+         "byArtist":[
+            {
+               "@id":"46a0e65c-bd69-327a-a9ca-93789ae6a473",
+               "name": "薛之谦"
+            }
+         ],
+         "identifier":"471385043",
+         "@id":"022858de-f892-373a-bb0f-668c8e50d16f",
+         "dateModified":"2017-05-15T15:54:44+08:00",
+         "listenCount":0,
+         "lyrics": "",
+         "position": 0
+      }
+   ],
+   "entityScore": 0,
+   "lyrics": "",
+   "keywords":[],
+   "alternateName":[],
+   "@id":"",
+   "@context": "http://schema.org/",
+  "@type":["MusicRecording","CreativeWork","Thing"]
+}
