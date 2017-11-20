@@ -193,6 +193,10 @@ class CoreTestCase(unittest.TestCase):
             assert ret["triple"] == 29
             assert ret[u"tag_抒情"] == 1
 
+    def test_stat(self):
+        data = [{u"名称": u"张三", u"年龄": u"13.0"}, {u"名称": u"李四", u"年龄": u"20"}]
+        ret = stat(data,[u"名称", u"年龄"],[u"名称", u"年龄"])
+
 
 if __name__ == '__main__':
     unittest.main()

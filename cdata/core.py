@@ -248,12 +248,17 @@ def stat(items, unique_fields, value_fields=[], printCounter=True):
                 unique_counter[field].append(item[field])
         for field in value_fields:
             value = item.get(field)
-            if value is not None and len(str(value)) > 0:
+            if value is None:
+                continue
+            elif type(value) in [ float, int ]:
+                vx = "%1.0d" % value
+            else:
+                vx = value
+            if len(vx) > 0:
                 counter[u"{}_{}".format(field, value)] += 1
-
-    for field in unique_fields:
-        counter[u"{}_unique".format(field)] = len(set(unique_counter[field]))
-        counter[u"{}_nonempty".format(field)] = len(unique_counter[field])
+        for field in unique_fields:
+            counter[u"{}_unique".format(field)] = len(set(unique_counter[field]))
+            counter[u"{}_nonempty".format(field)] = len(unique_counter[field])
 
     if printCounter:
         logging.info(json.dumps(counter, ensure_ascii=False,
